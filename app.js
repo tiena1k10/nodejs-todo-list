@@ -5,8 +5,8 @@ const path = require('path');
 // setup public folder
 app.use(express.static("./src/public"));
 app.use(express.json());
-require('dotenv').config()
-const port = process.env.PORT || 8888
+require('dotenv').config();
+//const port = process.env.PORT || 8888;
 const db = require("./src/db/connect");
 const notFound = require('./src/middleware/not-found');
 
@@ -18,9 +18,9 @@ app.use(bodyParser.json())
 
 db.connect().then(()=>{
     console.log("Connect Database thanh cong");
-    return app.listen(port);
+    return app.listen(process.env.PORT || 3000);
 }).then(()=>{
-    console.log(`Server is listening on: http://localhost:${port}`);
+    console.log(`Server is listening on: http://localhost`);
 })
 // setup router
 const taskRouter = require('./src/routes/TaskRouter');
