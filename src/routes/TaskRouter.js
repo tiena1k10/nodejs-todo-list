@@ -5,7 +5,7 @@ const {getAllTask,createTask,getTask,updateTask,deleteTask} = require('../contro
 
 router.route("/").get(getAllTask).post(createTask);
 
-router.route('/:id').get(getTask).put(updateTask).delete(deleteTask);
+router.route('/:id').get(getTask).patch(updateTask).delete(deleteTask);
 
 
 

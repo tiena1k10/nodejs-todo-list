@@ -4,9 +4,11 @@ const { required } = require("nodemon/lib/config");
 
 const taskModel = require('../models/TaskModel');
 const getAllTask = (req,res)=>{
-    taskModel.find({}).then((tasks)=>{
-        res.status(200).json({tasks});
-    }).catch(err=>{
+    taskModel.find({})
+    .then((tasks)=>{
+        res.status(200).json({status:"success",data:{tasks}});
+    })
+    .catch(err=>{
         res.status(500).json({msg:err});
     })
 }
@@ -14,9 +16,8 @@ const getAllTask = (req,res)=>{
 const createTask =  (req,res)=>{
     taskModel.create({
         name: req.body.name,
-       
-    }).then(value=>{
-        res.status(201).json({value});
+    }).then(task=>{
+        res.status(201).json({task});
     }).catch(err=>{
         res.status(500).json({msg:err});
     });
@@ -24,13 +25,13 @@ const createTask =  (req,res)=>{
 
 const updateTask = (req,res)=>{
     const {name,completed} = req.body;
-    taskModel.findByIdAndUpdate(req.params.id,{name,completed})
-    .then((taskBefore)=>{
-        console.log("sua thanh cong");
-        return  taskModel.findById(taskBefore.id)
-       
-    }).then((task)=>{
-        res.status(200).json({task});
+    taskModel.findByIdAndUpdate(req.params.id,req.body,{
+        new : true,
+        runValidators: true,
+    })
+    .then((task)=>{
+        task ? 
+        res.status(200).json({task}) : res.status(404).json({msg:`${req.params.id} does not exis ! `});
     })
     .catch(err=>{
         res.status(500).json({msg:err});
@@ -38,24 +39,23 @@ const updateTask = (req,res)=>{
 }
 
 const deleteTask = (req,res)=>{
-    console.log(req.params.id);
     taskModel.findByIdAndDelete(req.params.id)
-    .then((value)=>{
-        return taskModel.find({});
+    .then((task)=>{
+        task ? res.status(200).json({task}) :  res.status(404).json({msg:`${req.params.id} does not exis ! `});
     })
-    .then((tasks)=>{
-        res.status(200).json({tasks});
-    }).catch(err=>{
+    .catch(err=>{
         res.status(500).json({msg:err});
     })
 }
 const getTask = (req,res)=>{
     
     taskModel.findById(req.params.id)
-    .then(task=>{
-        if(task)
-        res.status(200).json({task});
-    }).catch(err=>{
+    // if req.params.id.lenght == _id.lenght (default) ==> task = null => 404
+    // else ==> throw err (catch) => 500;
+    .then((task)=>{
+        task ? res.status(200).json({task}) :  res.status(404).json({msg:`${req.params.id} does not exis ! `});
+    })
+    .catch(err=>{
         res.status(500).json({msg:err});
     })
 }
