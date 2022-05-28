@@ -23,6 +23,11 @@ db.connect().then(()=>{
     console.log(`Server is listening on: http://localhost`);
 })
 // setup router
+
+app.get("/",(req,res)=>{
+    res.send("hi");
+})
 const taskRouter = require('./src/routes/TaskRouter');
+const { rmdirSync } = require('fs');
 app.use('/api/v1/task',taskRouter);
 app.use(notFound);
