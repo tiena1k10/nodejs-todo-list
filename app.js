@@ -14,7 +14,7 @@ var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
-
+require('dotenv').config()
 
 db.connect().then(()=>{
     console.log("Connect Database thanh cong");
