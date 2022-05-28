@@ -20,7 +20,7 @@ db.connect().then(()=>{
     console.log("Connect Database thanh cong");
     return app.listen(port);
 }).then(()=>{
-    console.log("Server is listening on: http://localhost:8888/");
+    console.log(`Server is listening on: http://localhost:${port}`);
 })
 // setup router
 const taskRouter = require('./src/routes/TaskRouter');
