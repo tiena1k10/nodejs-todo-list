@@ -9,7 +9,7 @@ const showTasks = async () => {
   try {
     const {
       data: { tasks },
-    } = await axios.get('/api/v1/tasks')
+    } = await axios.get('/api/v1/task')
     if (tasks.length < 1) {
       tasksDOM.innerHTML = '<h5 class="empty-list">No tasks in your list</h5>'
       loadingDOM.style.visibility = 'hidden'
@@ -70,7 +70,7 @@ formDOM.addEventListener('submit', async (e) => {
   const name = taskInputDOM.value
 
   try {
-    await axios.post('/api/v1/tasks', { name })
+    await axios.post('/api/v1/task', { name })
     showTasks()
     taskInputDOM.value = ''
     formAlertDOM.style.display = 'block'
