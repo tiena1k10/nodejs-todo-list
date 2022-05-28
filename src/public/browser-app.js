@@ -54,7 +54,7 @@ tasksDOM.addEventListener('click', async (e) => {
     loadingDOM.style.visibility = 'visible'
     const id = el.parentElement.dataset.id
     try {
-      await axios.delete(`/api/v1/tasks/${id}`)
+      await axios.delete(`/api/v1/task/${id}`)
       showTasks()
     } catch (error) {
       console.log(error)

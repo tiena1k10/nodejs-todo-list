@@ -16,36 +16,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
-const start = async () =>{
-    await db.connect().then(()=>{console.log("a");});
-    await app.listen(8000,()=>{
-        console.log("b");
-    })
-    await setTimeout(()=>{
-        console.log("c");
-    },4000)
-    setTimeout(()=>{
-        console.log("d");
-    },0)
-    console.log("e");
-}
 
-start();
-
-// db.connect().then(()=>{
-//     console.log("db Thanh cong");
-//     return app.listen(8888);
-// }).then(()=>{
-//     console.log("server");
-// })
-
-
-// app.listen(PORT,()=>{
-//     console.log("Server is listening on: http://localhost:8888/");
-
-// });
-
+db.connect().then(()=>{
+    console.log("Connect Database thanh cong");
+    return app.listen(8888);
+}).then(()=>{
+    console.log("Server is listening on: http://localhost:8888/");
+})
 // setup router
 const taskRouter = require('./src/routes/TaskRouter');
-const { resolve } = require('path');
 app.use('/api/v1/task',taskRouter);
