@@ -5,7 +5,6 @@ const path = require('path');
 // setup public folder
 app.use(express.static("./src/public"));
 app.use(express.json());
-require('dotenv').config();
 //const port = process.env.PORT || 8888;
 const db = require("./src/db/connect");
 const notFound = require('./src/middleware/not-found');
