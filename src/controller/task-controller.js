@@ -2,7 +2,7 @@ const read = require("body-parser/lib/read");
 const { reset } = require("nodemon");
 const { required } = require("nodemon/lib/config");
 
-const taskModel = require('../models/TaskModel');
+const taskModel = require('../models/task-model');
 const getAllTask = (req,res)=>{
     taskModel.find({})
     .then((tasks)=>{
