@@ -23,6 +23,10 @@ db.connect().then(()=>{
     console.log(`Server is listening on: http://localhost:${port}`);
 })
 // setup router
-const router = require('./src/routes/main');
-app.use("/api/v1",router);
+const authRouter = require('./src/routes/auth-router');
+const jobRouter = require('./src/routes/job-router');
+
+app.use("/api/v1/auth",authRouter);
+app.use("/api/v1/jobs",jobRouter);
+
 app.use(notFound);
