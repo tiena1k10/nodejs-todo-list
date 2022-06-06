@@ -1,6 +1,5 @@
 const userModel = require('../models/user-model');
 const statusCode = require("http-status-codes");
-const jwt = require("jsonwebtoken");
 const login = (req,res)=>{
     res.send("login")
 }
@@ -12,7 +11,8 @@ const register = (req,res)=>{
     }
     userModel.create({name,email,password})
     .then(user=>{
-        res.status(statusCode.CREATED).json({msg:"success",user});
+        const token = user.createToken();
+        res.status(statusCode.CREATED).json({msg:"success",user: { name:user.name },token});
     })
     .catch(err=>{
         console.log("err : ",err);
