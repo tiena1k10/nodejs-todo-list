@@ -19,6 +19,10 @@ app.use(express.json());
 app.use(helmet());
 app.use(cors());
 app.use(xss());
+// swagger ui
+const swaggerUi = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerDoc = YAML.load("./swagger.yaml");
 
 
 
@@ -34,6 +38,8 @@ app.use(bodyParser.json())
 const db = require("./src/db/connect");
 require('dotenv').config();
 const port = process.env.PORT || 8888;
+
+app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDoc))
 db.connect().then(() => {
     console.log("Connect Database thanh cong");
     return app.listen(port);
