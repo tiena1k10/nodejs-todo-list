@@ -22,14 +22,11 @@ db.connect().then(() => {
 }).then(() => {
     console.log(`Server is listening on: http://localhost:${port}`);
 })
-// setup router
-const swagger = require('swagger-ui-express');
-const yamljs = require('yamljs');
-const swaggerDocument = yamljs.load("./swagger.yaml");
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require("./swagger.json");
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.get("/", (req, res) => {
-    res.send("hi");
-})
+// setup router
+
 const taskRouter = require('./src/routes/task-router');
 app.use('/api/v1/task', taskRouter);
 app.use(notFound);
