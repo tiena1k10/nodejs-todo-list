@@ -24,7 +24,8 @@ db.connect().then(() => {
 })
 // setup router
 const swagger = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.yaml');
+const yamljs = require('yamljs');
+const swaggerDocument = yamljs.load("./swagger.yaml");
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.get("/", (req, res) => {
     res.send("hi");
