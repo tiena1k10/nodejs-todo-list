@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "f67b6856-0ce0-4e25-9494-ce4ff08baf36",
+		"name": "Task Manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17989336"
+	},
+	"item": [
+		{
+			"name": "Get All Task",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Heroku_URL_todo_list}}/task",
+					"host": [
+						"{{Heroku_URL_todo_list}}"
+					],
+					"path": [
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Check mail",
+							"type": "text"
+						},
+						{
+							"key": "complete",
+							"value": "true",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{Heroku_URL_todo_list}}/task/",
+					"host": [
+						"{{Heroku_URL_todo_list}}"
+					],
+					"path": [
+						"task",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Task",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Heroku_URL_todo_list}}/task/6291ea712a267c773ae5970c",
+					"host": [
+						"{{Heroku_URL_todo_list}}"
+					],
+					"path": [
+						"task",
+						"6291ea712a267c773ae5970c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Task",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Heroku_URL_todo_list}}/task/6291a49397edbd0fa477212aa",
+					"host": [
+						"{{Heroku_URL_todo_list}}"
+					],
+					"path": [
+						"task",
+						"6291a49397edbd0fa477212aa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Task",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Check mail new",
+							"type": "text"
+						},
+						{
+							"key": "completed",
+							"value": "true",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{Heroku_URL_todo_list}}/task/62a749344981089e15b6678b",
+					"host": [
+						"{{Heroku_URL_todo_list}}"
+					],
+					"path": [
+						"task",
+						"62a749344981089e15b6678b"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
