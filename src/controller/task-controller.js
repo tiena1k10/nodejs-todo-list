@@ -1,64 +1,37 @@
-const read = require("body-parser/lib/read");
-const { reset } = require("nodemon");
-const { required } = require("nodemon/lib/config");
 
+const { createCustomError } = require('../middleware/custom-error');
+const asyncWrapper = require("../middleware/async");
 const taskModel = require('../models/task-model');
-const getAllTask = (req,res)=>{
-    taskModel.find({})
-    .then((tasks)=>{
-        res.status(200).json({status:"success",data:{tasks}});
-    })
-    .catch(err=>{
-        res.status(500).json({msg:err});
-    })
-}
+const getAllTask = asyncWrapper(async (req, res, next) => {
+    const tasks = await taskModel.find({})
+    res.status(200).json({ status: "success", data: { tasks } });
 
-const createTask =  (req,res)=>{
-    taskModel.create({
+})
+const createTask = asyncWrapper(async (req, res, next) => {
+    const task = await taskModel.create({
         name: req.body.name,
-    }).then(task=>{
-        res.status(201).json({task});
-    }).catch(err=>{
-        res.status(500).json({msg:err});
     });
-}
+    res.status(200).json({ task });
 
-const updateTask = (req,res)=>{
-    const {name,completed} = req.body;
-    taskModel.findByIdAndUpdate(req.params.id,req.body,{
-        new : true,
+});
+const updateTask = asyncWrapper(async (req, res, next) => {
+    const task = await taskModel.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
         runValidators: true,
     })
-    .then((task)=>{
-        task ? 
-        res.status(200).json({task}) : res.status(404).json({msg:`${req.params.id} does not exis ! `});
-    })
-    .catch(err=>{
-        res.status(500).json({msg:err});
-    });
-}
-
-const deleteTask = (req,res)=>{
-    taskModel.findByIdAndDelete(req.params.id)
-    .then((task)=>{
-        task ? res.status(200).json({task}) :  res.status(404).json({msg:`${req.params.id} does not exis ! `});
-    })
-    .catch(err=>{
-        res.status(500).json({msg:err});
-    })
-}
-const getTask = (req,res)=>{
-    
-    taskModel.findById(req.params.id)
-    // if req.params.id.lenght == _id.lenght (default) ==> task = null => 404
-    // else ==> throw err (catch) => 500;
-    .then((task)=>{
-        task ? res.status(200).json({task}) :  res.status(404).json({msg:`${req.params.id} does not exis ! `});
-    })
-    .catch(err=>{
-        res.status(500).json({msg:err});
-    })
-}
+    if (task) return res.status(200).json({ task });
+    return next(createCustomError(`no task with id : ${req.params.id}`, 404));
+});
+const deleteTask = asyncWrapper(async (req, res, next) => {
+    const task = await taskModel.findByIdAndDelete(req.params.id)
+    if (task) return res.status(200).json({ task });
+    return (createCustomError(`no task with id : ${req.params.id}`, 404));
+});
+const getTask = asyncWrapper(async (req, res, next) => {
+    const task = await taskModel.findById(req.params.id)
+    if (task) return res.status(200).json({ task });
+    return next(createCustomError(`no task with id : ${req.params.id}`, 404));
+});
 
 module.exports = {
     getAllTask,

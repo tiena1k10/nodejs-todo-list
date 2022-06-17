@@ -29,4 +29,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const taskRouter = require('./src/routes/task-router');
 app.use('/api/v1/task', taskRouter);
+// handle err
+const handleError = require("./src/middleware/errors");
+app.use(handleError);
+// not found
 app.use(notFound);
