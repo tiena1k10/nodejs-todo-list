@@ -39,7 +39,6 @@ const swaggerUi = require("swagger-ui-express");
 // const YAML = require("yamljs");
 const swaggerDoc = require("./swagger.json");
 
-app.get("/", swaggerUi.serve, swaggerUi.setup(swaggerDoc))
 db.connect().then(() => {
     console.log("Connect Database thanh cong");
     return app.listen(port);
@@ -52,5 +51,6 @@ const jobRouter = require('./src/routes/job-router');
 const authMiddelware = require("./src/middleware/auth-middle");
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authMiddelware, jobRouter);
+app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDoc))
 
 app.use(notFound);
