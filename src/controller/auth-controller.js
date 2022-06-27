@@ -34,6 +34,7 @@ const login = async (req, res) => {
 }
 
 const register = (req, res) => {
+    console.log("dang ki");
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
         return res.status(500).json({ msg: "please provide name, email, password" })
