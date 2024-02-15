@@ -1,11 +1,12 @@
 {
-  "name": "jwt-basic",
+  "name": "nodejs-todo-list",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "prod": "pm2 start app.js --name nodejs-todo-list"
   },
   "author": "",
   "license": "ISC",
