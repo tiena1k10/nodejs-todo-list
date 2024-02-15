@@ -2,15 +2,15 @@ openapi: 3.0.0
 info:
   title: Jobs API
   contact: {}
-  version: '1.0'
+  version: "1.0"
 servers:
-- url: https://dev20-job-api.herokuapp.com/api/v1
-  variables: {}
+  - url: https://todo.truyenhay.asia/api/v1
+    variables: {}
 paths:
   /auth/register:
     post:
       tags:
-      - Auth
+        - Auth
       summary: Create User
       operationId: CreateUser
       parameters: []
@@ -20,9 +20,9 @@ paths:
             encoding: {}
             schema:
               required:
-              - name
-              - email
-              - password
+                - name
+                - email
+                - password
               type: object
               properties:
                 name:
@@ -37,14 +37,14 @@ paths:
                   example: 123456
         required: false
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers: {}
       deprecated: false
   /auth/login:
     post:
       tags:
-      - Auth
+        - Auth
       summary: Login
       operationId: Login
       parameters: []
@@ -54,8 +54,8 @@ paths:
             encoding: {}
             schema:
               required:
-              - email
-              - password
+                - email
+                - password
               type: object
               properties:
                 email:
@@ -67,14 +67,14 @@ paths:
                   example: 123456
         required: false
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers: {}
       deprecated: false
   /jobs:
     post:
       tags:
-      - Jobs
+        - Jobs
       summary: Create Job
       operationId: CreateJob
       parameters: []
@@ -84,8 +84,8 @@ paths:
             encoding: {}
             schema:
               required:
-              - company
-              - position
+                - company
+                - position
               type: object
               properties:
                 company:
@@ -96,25 +96,25 @@ paths:
                   example: aaaa
         required: false
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers: {}
       deprecated: false
       security:
-      - bearer: []
+        - bearer: []
     get:
       tags:
-      - Jobs
+        - Jobs
       summary: Get All Jobs
       operationId: GetAllJobs
       parameters: []
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers: {}
       deprecated: false
       security:
-      - bearer: []
+        - bearer: []
   /jobs/{id}:
     parameters:
       - in: path
@@ -125,20 +125,20 @@ paths:
         description: The job ID
     get:
       tags:
-      - Jobs
+        - Jobs
       summary: Get SingleJob
       operationId: GetSingleJob
       parameters: []
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers: {}
       deprecated: false
       security:
-      - bearer: []
+        - bearer: []
     patch:
       tags:
-      - Jobs
+        - Jobs
       summary: Update Job
       operationId: UpdateJob
       parameters: []
@@ -148,8 +148,8 @@ paths:
             encoding: {}
             schema:
               required:
-              - company
-              - position
+                - company
+                - position
               type: object
               properties:
                 company:
@@ -160,25 +160,25 @@ paths:
                   example: intern
         required: false
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers: {}
       deprecated: false
       security:
-      - bearer: []
+        - bearer: []
     delete:
       tags:
-      - Jobs
+        - Jobs
       summary: Delete Job
       operationId: DeleteJob
       parameters: []
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers: {}
       deprecated: false
       security:
-      - bearer: []
+        - bearer: []
 components:
   securitySchemes:
     bearer:
@@ -186,8 +186,7 @@ components:
       scheme: bearer
 security: []
 tags:
-
-- name: Auth
-  description: ''
-- name: Jobs
-  description: ''
+  - name: Auth
+    description: ""
+  - name: Jobs
+    description: ""
